@@ -116,6 +116,7 @@ namespace Toolerino
 			this.b_createClients.TabIndex = 2;
 			this.b_createClients.Text = "Create clients";
 			this.b_createClients.UseVisualStyleBackColor = true;
+			this.b_createClients.Click += new System.EventHandler(this.b_createClients_Click);
 			// 
 			// label1
 			// 
@@ -294,6 +295,7 @@ namespace Toolerino
 			this.b_sendMessage.TabIndex = 2;
 			this.b_sendMessage.Text = "Send message(s)";
 			this.b_sendMessage.UseVisualStyleBackColor = true;
+			this.b_sendMessage.Click += new System.EventHandler(this.b_sendMessage_Click);
 			// 
 			// label2
 			// 
