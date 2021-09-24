@@ -58,6 +58,22 @@ namespace Toolerino
 
 		private void Toolerino_Load(object sender, EventArgs e)
 		{
+			ToolTip mainToolTip = new ToolTip();
+			mainToolTip.AutoPopDelay = 5000;
+			mainToolTip.InitialDelay = 1000;
+			mainToolTip.ReshowDelay = 500;
+			mainToolTip.ShowAlways = true;
+
+			mainToolTip.SetToolTip(this.tb_channel, "The channel to send messages in");
+			mainToolTip.SetToolTip(this.tb_oauth, "OAuth to sign in under");
+			mainToolTip.SetToolTip(this.nud_connections, "How many connections to use");
+			mainToolTip.SetToolTip(this.tb_message, "Message to send");
+			mainToolTip.SetToolTip(this.nud_messageRepeat, "How many times to repeat the message");
+			mainToolTip.SetToolTip(this.tb_pyramidMsg, "Message to pyramid");
+			mainToolTip.SetToolTip(this.nud_pyramidWidth, "How wide the pyramid should be");
+			mainToolTip.SetToolTip(this.tb_list, "List of messages to say");
+			mainToolTip.SetToolTip(this.nud_chunkSize, "How large each chunk should be (30s delay)");
+
 			if (!String.IsNullOrEmpty(Properties.Settings.Default.oauth))
 			{
 				OAuth = Properties.Settings.Default.oauth;
