@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolerino", "Toolerino\Toolerino.csproj", "{2215164B-B38D-4656-BDAE-6984DDD382B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2215164B-B38D-4656-BDAE-6984DDD382B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2215164B-B38D-4656-BDAE-6984DDD382B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2215164B-B38D-4656-BDAE-6984DDD382B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2215164B-B38D-4656-BDAE-6984DDD382B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C4F2B6C-4D34-402C-A15C-F2F27AA3F9F0}
+	EndGlobalSection
+EndGlobal
