@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Threading;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,6 @@ namespace Toolerino
 
 		private void b_createClients_Click(object sender, EventArgs e)
 		{
-			Console.WriteLine("click");
 			for (int i = 0; i < nud_connections.Value; i++)
 			{
 				Console.WriteLine($"Creating client {i}");
@@ -50,6 +50,12 @@ namespace Toolerino
 
 		private void b_sendMessage_Click(object sender, EventArgs e)
 		{
+			if (clients.Count() == 0)
+			{
+				MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			for (int i = 0; i < nud_messageRepeat.Value; i++)
 			{
 				getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), tb_message.Text);
@@ -78,7 +84,6 @@ namespace Toolerino
 			{
 				OAuth = Properties.Settings.Default.oauth;
 				tb_oauth.Text = OAuth;
-				Console.WriteLine(Properties.Settings.Default.oauth);
 			}
 		}
 
@@ -98,7 +103,43 @@ namespace Toolerino
 
 		private void b_sendPyramid_Click(object sender, EventArgs e)
 		{
+			if (clients.Count() == 0)
+			{
+				MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
+			int width = (int)nud_pyramidWidth.Value++;
+			string msg = tb_pyramidMsg.Text;
+
+			if (width * msg.Length > 500)
+			{
+				MessageBox.Show("Message is too long for the pyramid", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			else
+			{
+				for (int i = 0; i < width; i++)
+				{
+					string line = "";
+					for (int j = 1; j < i; j++)
+					{
+						line += $"{msg} ";
+					}
+					Thread.Sleep(100);
+					getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), line);
+				}
+
+				for (int i = width - 1; i >= 0; i--)
+				{
+					string line = "";
+					for (int j = 0; j < i; j++)
+					{
+						line += $"{msg} ";
+					}
+					Thread.Sleep(100);
+					getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), line);
+				}
+			}
 		}
 	}
 }
