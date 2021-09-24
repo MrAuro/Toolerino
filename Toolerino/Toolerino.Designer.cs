@@ -1,7 +1,7 @@
 ﻿
 namespace Toolerino
 {
-	partial class Form1
+	partial class Toolerino
 	{
 		/// <summary>
 		/// Required designer variable.

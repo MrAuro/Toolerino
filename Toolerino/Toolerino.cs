@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Toolerino
 {
-	public partial class Form1 : Form
+	public partial class Toolerino : Form
 	{
-		public Form1()
+		public Toolerino()
 		{
 			InitializeComponent();
 		}
