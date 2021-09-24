@@ -95,6 +95,7 @@ namespace Toolerino
 			this.tb_oauth.PasswordChar = '*';
 			this.tb_oauth.Size = new System.Drawing.Size(248, 23);
 			this.tb_oauth.TabIndex = 4;
+			this.tb_oauth.TextChanged += new System.EventHandler(this.tb_oauth_TextChanged);
 			// 
 			// nud_connections
 			// 
@@ -245,6 +246,7 @@ namespace Toolerino
 			this.b_sendPyramid.TabIndex = 7;
 			this.b_sendPyramid.Text = "Send pyramid";
 			this.b_sendPyramid.UseVisualStyleBackColor = true;
+			this.b_sendPyramid.Click += new System.EventHandler(this.b_sendPyramid_Click);
 			// 
 			// tb_pyramidMsg
 			// 
@@ -332,6 +334,8 @@ namespace Toolerino
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Toolerino";
 			this.Text = "Toolerino";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Toolerino_FormClosing);
+			this.Load += new System.EventHandler(this.Toolerino_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).EndInit();
