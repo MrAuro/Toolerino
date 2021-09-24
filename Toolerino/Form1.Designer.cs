@@ -30,41 +30,45 @@ namespace Toolerino
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.tb_channel = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.b_createClients = new System.Windows.Forms.Button();
+			this.nud_connections = new System.Windows.Forms.NumericUpDown();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-			this.button2 = new System.Windows.Forms.Button();
+			this.nud_messageRepeat = new System.Windows.Forms.NumericUpDown();
+			this.b_sendMessage = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+			this.tb_message = new System.Windows.Forms.TextBox();
+			this.nud_pyramidWidth = new System.Windows.Forms.NumericUpDown();
 			this.label3 = new System.Windows.Forms.Label();
-			this.textBox3 = new System.Windows.Forms.TextBox();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.textBox4 = new System.Windows.Forms.TextBox();
+			this.tb_pyramidMsg = new System.Windows.Forms.TextBox();
+			this.b_sendPyramid = new System.Windows.Forms.Button();
+			this.b_runList = new System.Windows.Forms.Button();
+			this.tb_list = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
-			this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+			this.nud_chunkSize = new System.Windows.Forms.NumericUpDown();
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
-			this.radioButton1 = new System.Windows.Forms.RadioButton();
-			this.radioButton2 = new System.Windows.Forms.RadioButton();
-			this.radioButton3 = new System.Windows.Forms.RadioButton();
+			this.r_ban = new System.Windows.Forms.RadioButton();
+			this.r_unban = new System.Windows.Forms.RadioButton();
+			this.r_say = new System.Windows.Forms.RadioButton();
+			this.tb_oauth = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_messageRepeat)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_pyramidWidth)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_chunkSize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.numericUpDown1);
-			this.groupBox1.Controls.Add(this.button1);
+			this.groupBox1.Controls.Add(this.label5);
+			this.groupBox1.Controls.Add(this.tb_oauth);
+			this.groupBox1.Controls.Add(this.nud_connections);
+			this.groupBox1.Controls.Add(this.b_createClients);
 			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.textBox1);
+			this.groupBox1.Controls.Add(this.tb_channel);
 			this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox1.Location = new System.Drawing.Point(13, 12);
 			this.groupBox1.Name = "groupBox1";
@@ -73,12 +77,12 @@ namespace Toolerino
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Connection";
 			// 
-			// textBox1
+			// tb_channel
 			// 
-			this.textBox1.Location = new System.Drawing.Point(9, 37);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(430, 23);
-			this.textBox1.TabIndex = 0;
+			this.tb_channel.Location = new System.Drawing.Point(9, 37);
+			this.tb_channel.Name = "tb_channel";
+			this.tb_channel.Size = new System.Drawing.Size(176, 23);
+			this.tb_channel.TabIndex = 0;
 			// 
 			// label1
 			// 
@@ -90,22 +94,22 @@ namespace Toolerino
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Channel";
 			// 
-			// button1
+			// b_createClients
 			// 
-			this.button1.Location = new System.Drawing.Point(9, 66);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(375, 23);
-			this.button1.TabIndex = 2;
-			this.button1.Text = "Create clients";
-			this.button1.UseVisualStyleBackColor = true;
+			this.b_createClients.Location = new System.Drawing.Point(9, 66);
+			this.b_createClients.Name = "b_createClients";
+			this.b_createClients.Size = new System.Drawing.Size(375, 23);
+			this.b_createClients.TabIndex = 2;
+			this.b_createClients.Text = "Create clients";
+			this.b_createClients.UseVisualStyleBackColor = true;
 			// 
-			// numericUpDown1
+			// nud_connections
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(390, 66);
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(49, 23);
-			this.numericUpDown1.TabIndex = 3;
-			this.numericUpDown1.Value = new decimal(new int[] {
+			this.nud_connections.Location = new System.Drawing.Point(390, 66);
+			this.nud_connections.Name = "nud_connections";
+			this.nud_connections.Size = new System.Drawing.Size(49, 23);
+			this.nud_connections.TabIndex = 3;
+			this.nud_connections.Value = new decimal(new int[] {
             10,
             0,
             0,
@@ -113,21 +117,21 @@ namespace Toolerino
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.radioButton3);
-			this.groupBox2.Controls.Add(this.radioButton2);
-			this.groupBox2.Controls.Add(this.radioButton1);
-			this.groupBox2.Controls.Add(this.button4);
-			this.groupBox2.Controls.Add(this.textBox4);
+			this.groupBox2.Controls.Add(this.r_say);
+			this.groupBox2.Controls.Add(this.r_unban);
+			this.groupBox2.Controls.Add(this.r_ban);
+			this.groupBox2.Controls.Add(this.b_runList);
+			this.groupBox2.Controls.Add(this.tb_list);
 			this.groupBox2.Controls.Add(this.label4);
-			this.groupBox2.Controls.Add(this.numericUpDown4);
-			this.groupBox2.Controls.Add(this.button3);
-			this.groupBox2.Controls.Add(this.textBox3);
+			this.groupBox2.Controls.Add(this.nud_chunkSize);
+			this.groupBox2.Controls.Add(this.b_sendPyramid);
+			this.groupBox2.Controls.Add(this.tb_pyramidMsg);
 			this.groupBox2.Controls.Add(this.label3);
-			this.groupBox2.Controls.Add(this.numericUpDown3);
-			this.groupBox2.Controls.Add(this.numericUpDown2);
-			this.groupBox2.Controls.Add(this.button2);
+			this.groupBox2.Controls.Add(this.nud_pyramidWidth);
+			this.groupBox2.Controls.Add(this.nud_messageRepeat);
+			this.groupBox2.Controls.Add(this.b_sendMessage);
 			this.groupBox2.Controls.Add(this.label2);
-			this.groupBox2.Controls.Add(this.textBox2);
+			this.groupBox2.Controls.Add(this.tb_message);
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(13, 118);
 			this.groupBox2.Name = "groupBox2";
@@ -136,26 +140,26 @@ namespace Toolerino
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Messaging";
 			// 
-			// numericUpDown2
+			// nud_messageRepeat
 			// 
-			this.numericUpDown2.Location = new System.Drawing.Point(390, 66);
-			this.numericUpDown2.Name = "numericUpDown2";
-			this.numericUpDown2.Size = new System.Drawing.Size(49, 23);
-			this.numericUpDown2.TabIndex = 3;
-			this.numericUpDown2.Value = new decimal(new int[] {
+			this.nud_messageRepeat.Location = new System.Drawing.Point(390, 66);
+			this.nud_messageRepeat.Name = "nud_messageRepeat";
+			this.nud_messageRepeat.Size = new System.Drawing.Size(49, 23);
+			this.nud_messageRepeat.TabIndex = 3;
+			this.nud_messageRepeat.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
 			// 
-			// button2
+			// b_sendMessage
 			// 
-			this.button2.Location = new System.Drawing.Point(9, 66);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(375, 23);
-			this.button2.TabIndex = 2;
-			this.button2.Text = "Send message(s)";
-			this.button2.UseVisualStyleBackColor = true;
+			this.b_sendMessage.Location = new System.Drawing.Point(9, 66);
+			this.b_sendMessage.Name = "b_sendMessage";
+			this.b_sendMessage.Size = new System.Drawing.Size(375, 23);
+			this.b_sendMessage.TabIndex = 2;
+			this.b_sendMessage.Text = "Send message(s)";
+			this.b_sendMessage.UseVisualStyleBackColor = true;
 			// 
 			// label2
 			// 
@@ -167,20 +171,20 @@ namespace Toolerino
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Message";
 			// 
-			// textBox2
+			// tb_message
 			// 
-			this.textBox2.Location = new System.Drawing.Point(9, 37);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(430, 23);
-			this.textBox2.TabIndex = 0;
+			this.tb_message.Location = new System.Drawing.Point(9, 37);
+			this.tb_message.Name = "tb_message";
+			this.tb_message.Size = new System.Drawing.Size(430, 23);
+			this.tb_message.TabIndex = 0;
 			// 
-			// numericUpDown3
+			// nud_pyramidWidth
 			// 
-			this.numericUpDown3.Location = new System.Drawing.Point(390, 111);
-			this.numericUpDown3.Name = "numericUpDown3";
-			this.numericUpDown3.Size = new System.Drawing.Size(49, 23);
-			this.numericUpDown3.TabIndex = 4;
-			this.numericUpDown3.Value = new decimal(new int[] {
+			this.nud_pyramidWidth.Location = new System.Drawing.Point(390, 111);
+			this.nud_pyramidWidth.Name = "nud_pyramidWidth";
+			this.nud_pyramidWidth.Size = new System.Drawing.Size(49, 23);
+			this.nud_pyramidWidth.TabIndex = 4;
+			this.nud_pyramidWidth.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -196,38 +200,38 @@ namespace Toolerino
 			this.label3.TabIndex = 5;
 			this.label3.Text = "Pyramid";
 			// 
-			// textBox3
+			// tb_pyramidMsg
 			// 
-			this.textBox3.Location = new System.Drawing.Point(9, 110);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(375, 23);
-			this.textBox3.TabIndex = 6;
+			this.tb_pyramidMsg.Location = new System.Drawing.Point(9, 110);
+			this.tb_pyramidMsg.Name = "tb_pyramidMsg";
+			this.tb_pyramidMsg.Size = new System.Drawing.Size(375, 23);
+			this.tb_pyramidMsg.TabIndex = 6;
 			// 
-			// button3
+			// b_sendPyramid
 			// 
-			this.button3.Location = new System.Drawing.Point(9, 139);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(430, 23);
-			this.button3.TabIndex = 7;
-			this.button3.Text = "Send pyramid";
-			this.button3.UseVisualStyleBackColor = true;
+			this.b_sendPyramid.Location = new System.Drawing.Point(9, 139);
+			this.b_sendPyramid.Name = "b_sendPyramid";
+			this.b_sendPyramid.Size = new System.Drawing.Size(430, 23);
+			this.b_sendPyramid.TabIndex = 7;
+			this.b_sendPyramid.Text = "Send pyramid";
+			this.b_sendPyramid.UseVisualStyleBackColor = true;
 			// 
-			// button4
+			// b_runList
 			// 
-			this.button4.Location = new System.Drawing.Point(9, 277);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(333, 23);
-			this.button4.TabIndex = 11;
-			this.button4.Text = "Run list";
-			this.button4.UseVisualStyleBackColor = true;
+			this.b_runList.Location = new System.Drawing.Point(9, 277);
+			this.b_runList.Name = "b_runList";
+			this.b_runList.Size = new System.Drawing.Size(333, 23);
+			this.b_runList.TabIndex = 11;
+			this.b_runList.Text = "Run list";
+			this.b_runList.UseVisualStyleBackColor = true;
 			// 
-			// textBox4
+			// tb_list
 			// 
-			this.textBox4.Location = new System.Drawing.Point(9, 183);
-			this.textBox4.Multiline = true;
-			this.textBox4.Name = "textBox4";
-			this.textBox4.Size = new System.Drawing.Size(333, 88);
-			this.textBox4.TabIndex = 10;
+			this.tb_list.Location = new System.Drawing.Point(9, 183);
+			this.tb_list.Multiline = true;
+			this.tb_list.Name = "tb_list";
+			this.tb_list.Size = new System.Drawing.Size(333, 88);
+			this.tb_list.TabIndex = 10;
 			// 
 			// label4
 			// 
@@ -239,18 +243,18 @@ namespace Toolerino
 			this.label4.TabIndex = 9;
 			this.label4.Text = "File";
 			// 
-			// numericUpDown4
+			// nud_chunkSize
 			// 
-			this.numericUpDown4.Location = new System.Drawing.Point(348, 277);
-			this.numericUpDown4.Maximum = new decimal(new int[] {
+			this.nud_chunkSize.Location = new System.Drawing.Point(348, 277);
+			this.nud_chunkSize.Maximum = new decimal(new int[] {
             7500,
             0,
             0,
             0});
-			this.numericUpDown4.Name = "numericUpDown4";
-			this.numericUpDown4.Size = new System.Drawing.Size(91, 23);
-			this.numericUpDown4.TabIndex = 8;
-			this.numericUpDown4.Value = new decimal(new int[] {
+			this.nud_chunkSize.Name = "nud_chunkSize";
+			this.nud_chunkSize.Size = new System.Drawing.Size(91, 23);
+			this.nud_chunkSize.TabIndex = 8;
+			this.nud_chunkSize.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -263,38 +267,56 @@ namespace Toolerino
 			this.progressBar1.Size = new System.Drawing.Size(445, 23);
 			this.progressBar1.TabIndex = 5;
 			// 
-			// radioButton1
+			// r_ban
 			// 
-			this.radioButton1.AutoSize = true;
-			this.radioButton1.Location = new System.Drawing.Point(348, 184);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(45, 19);
-			this.radioButton1.TabIndex = 12;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.Text = "Ban";
-			this.radioButton1.UseVisualStyleBackColor = true;
+			this.r_ban.AutoSize = true;
+			this.r_ban.Location = new System.Drawing.Point(348, 184);
+			this.r_ban.Name = "r_ban";
+			this.r_ban.Size = new System.Drawing.Size(45, 19);
+			this.r_ban.TabIndex = 12;
+			this.r_ban.TabStop = true;
+			this.r_ban.Text = "Ban";
+			this.r_ban.UseVisualStyleBackColor = true;
 			// 
-			// radioButton2
+			// r_unban
 			// 
-			this.radioButton2.AutoSize = true;
-			this.radioButton2.Location = new System.Drawing.Point(348, 209);
-			this.radioButton2.Name = "radioButton2";
-			this.radioButton2.Size = new System.Drawing.Size(60, 19);
-			this.radioButton2.TabIndex = 13;
-			this.radioButton2.TabStop = true;
-			this.radioButton2.Text = "Unban";
-			this.radioButton2.UseVisualStyleBackColor = true;
+			this.r_unban.AutoSize = true;
+			this.r_unban.Location = new System.Drawing.Point(348, 209);
+			this.r_unban.Name = "r_unban";
+			this.r_unban.Size = new System.Drawing.Size(60, 19);
+			this.r_unban.TabIndex = 13;
+			this.r_unban.TabStop = true;
+			this.r_unban.Text = "Unban";
+			this.r_unban.UseVisualStyleBackColor = true;
 			// 
-			// radioButton3
+			// r_say
 			// 
-			this.radioButton3.AutoSize = true;
-			this.radioButton3.Location = new System.Drawing.Point(348, 234);
-			this.radioButton3.Name = "radioButton3";
-			this.radioButton3.Size = new System.Drawing.Size(43, 19);
-			this.radioButton3.TabIndex = 14;
-			this.radioButton3.TabStop = true;
-			this.radioButton3.Text = "Say";
-			this.radioButton3.UseVisualStyleBackColor = true;
+			this.r_say.AutoSize = true;
+			this.r_say.Location = new System.Drawing.Point(348, 234);
+			this.r_say.Name = "r_say";
+			this.r_say.Size = new System.Drawing.Size(43, 19);
+			this.r_say.TabIndex = 14;
+			this.r_say.TabStop = true;
+			this.r_say.Text = "Say";
+			this.r_say.UseVisualStyleBackColor = true;
+			// 
+			// tb_oauth
+			// 
+			this.tb_oauth.Location = new System.Drawing.Point(191, 37);
+			this.tb_oauth.Name = "tb_oauth";
+			this.tb_oauth.PasswordChar = '*';
+			this.tb_oauth.Size = new System.Drawing.Size(248, 23);
+			this.tb_oauth.TabIndex = 4;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.Location = new System.Drawing.Point(188, 19);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(42, 15);
+			this.label5.TabIndex = 5;
+			this.label5.Text = "OAuth";
 			// 
 			// Form1
 			// 
@@ -308,12 +330,12 @@ namespace Toolerino
 			this.Text = "Toolerino";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_messageRepeat)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_pyramidWidth)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.nud_chunkSize)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -321,27 +343,29 @@ namespace Toolerino
 		#endregion
 
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.NumericUpDown nud_connections;
+		private System.Windows.Forms.Button b_createClients;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox tb_channel;
 		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.RadioButton radioButton3;
-		private System.Windows.Forms.RadioButton radioButton2;
-		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.TextBox textBox4;
+		private System.Windows.Forms.RadioButton r_say;
+		private System.Windows.Forms.RadioButton r_unban;
+		private System.Windows.Forms.RadioButton r_ban;
+		private System.Windows.Forms.Button b_runList;
+		private System.Windows.Forms.TextBox tb_list;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.NumericUpDown numericUpDown4;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.NumericUpDown nud_chunkSize;
+		private System.Windows.Forms.Button b_sendPyramid;
+		private System.Windows.Forms.TextBox tb_pyramidMsg;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.NumericUpDown numericUpDown3;
-		private System.Windows.Forms.NumericUpDown numericUpDown2;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.NumericUpDown nud_pyramidWidth;
+		private System.Windows.Forms.NumericUpDown nud_messageRepeat;
+		private System.Windows.Forms.Button b_sendMessage;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.TextBox tb_message;
 		private System.Windows.Forms.ProgressBar progressBar1;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox tb_oauth;
 	}
 }
 
