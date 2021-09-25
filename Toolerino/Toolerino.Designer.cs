@@ -54,8 +54,9 @@ namespace Toolerino
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_message = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.tb_Logs = new System.Windows.Forms.TextBox();
 			this.b_clearLogs = new System.Windows.Forms.Button();
+			this.tb_Logs = new System.Windows.Forms.TextBox();
+			this.b_rejoin = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -67,6 +68,7 @@ namespace Toolerino
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.b_rejoin);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Controls.Add(this.tb_oauth);
 			this.groupBox1.Controls.Add(this.nud_connections);
@@ -116,7 +118,7 @@ namespace Toolerino
 			// 
 			this.b_createClients.Location = new System.Drawing.Point(9, 66);
 			this.b_createClients.Name = "b_createClients";
-			this.b_createClients.Size = new System.Drawing.Size(375, 23);
+			this.b_createClients.Size = new System.Drawing.Size(248, 23);
 			this.b_createClients.TabIndex = 2;
 			this.b_createClients.Text = "Create clients";
 			this.b_createClients.UseVisualStyleBackColor = true;
@@ -332,16 +334,6 @@ namespace Toolerino
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Logs";
 			// 
-			// tb_Logs
-			// 
-			this.tb_Logs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tb_Logs.Location = new System.Drawing.Point(7, 20);
-			this.tb_Logs.Multiline = true;
-			this.tb_Logs.Name = "tb_Logs";
-			this.tb_Logs.ReadOnly = true;
-			this.tb_Logs.Size = new System.Drawing.Size(377, 62);
-			this.tb_Logs.TabIndex = 0;
-			// 
 			// b_clearLogs
 			// 
 			this.b_clearLogs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -352,6 +344,26 @@ namespace Toolerino
 			this.b_clearLogs.Text = "Clear";
 			this.b_clearLogs.UseVisualStyleBackColor = true;
 			this.b_clearLogs.Click += new System.EventHandler(this.b_clearLogs_Click);
+			// 
+			// tb_Logs
+			// 
+			this.tb_Logs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.tb_Logs.Location = new System.Drawing.Point(7, 20);
+			this.tb_Logs.Multiline = true;
+			this.tb_Logs.Name = "tb_Logs";
+			this.tb_Logs.ReadOnly = true;
+			this.tb_Logs.Size = new System.Drawing.Size(377, 62);
+			this.tb_Logs.TabIndex = 0;
+			// 
+			// b_rejoin
+			// 
+			this.b_rejoin.Location = new System.Drawing.Point(263, 66);
+			this.b_rejoin.Name = "b_rejoin";
+			this.b_rejoin.Size = new System.Drawing.Size(121, 23);
+			this.b_rejoin.TabIndex = 6;
+			this.b_rejoin.Text = "Rejoin channel";
+			this.b_rejoin.UseVisualStyleBackColor = true;
+			this.b_rejoin.Click += new System.EventHandler(this.b_rejoin_Click);
 			// 
 			// Toolerino
 			// 
@@ -409,6 +421,7 @@ namespace Toolerino
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.Button b_clearLogs;
 		private System.Windows.Forms.TextBox tb_Logs;
+		private System.Windows.Forms.Button b_rejoin;
 	}
 }
 

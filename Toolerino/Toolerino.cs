@@ -153,5 +153,13 @@ namespace Toolerino
 		{
 			Channel = tb_channel.Text.Replace("#", "");
 		}
+
+		private void b_rejoin_Click(object sender, EventArgs e)
+		{
+			for (int i = 0; i < clients.Count; i++)
+			{
+				clients[i].client.JoinChannel(tb_channel.Text);
+			}
+		}
 	}
 }
