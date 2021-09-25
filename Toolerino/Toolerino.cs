@@ -44,7 +44,7 @@ namespace Toolerino
 			for (int i = 0; i < nud_connections.Value; i++)
 			{
 				Console.WriteLine($"Creating client {i}");
-				clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", "auror6s"));
+				clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", tb_channel.Text));
 			}
 		}
 
