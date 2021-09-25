@@ -23,6 +23,7 @@ namespace Toolerino
 	{
 		List<Client> clients = new List<Client>();
 		string OAuth;
+		string Channel;
 
 		int lastIndex = 0;
 		private Client getConnection()
@@ -44,7 +45,8 @@ namespace Toolerino
 			for (int i = 0; i < nud_connections.Value; i++)
 			{
 				Console.WriteLine($"Creating client {i}");
-				clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", tb_channel.Text));
+				tb_Logs.AppendText($"Creating client {i}" + "\r\n");
+				clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel));
 			}
 		}
 
@@ -58,7 +60,7 @@ namespace Toolerino
 
 			for (int i = 0; i < nud_messageRepeat.Value; i++)
 			{
-				getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), tb_message.Text);
+				getConnection().client.SendMessage(Channel, tb_message.Text);
 			}
 		}
 
@@ -126,7 +128,7 @@ namespace Toolerino
 						line += $"{msg} ";
 					}
 					Thread.Sleep(100);
-					getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), line);
+					getConnection().client.SendMessage(Channel, line);
 				}
 
 				for (int i = width - 1; i >= 0; i--)
@@ -137,9 +139,19 @@ namespace Toolerino
 						line += $"{msg} ";
 					}
 					Thread.Sleep(100);
-					getConnection().client.SendMessage(tb_channel.Text.Replace("#", ""), line);
+					getConnection().client.SendMessage(Channel, line);
 				}
 			}
+		}
+
+		private void b_clearLogs_Click(object sender, EventArgs e)
+		{
+			tb_Logs.Text = "";
+		}
+
+		private void tb_channel_TextChanged(object sender, EventArgs e)
+		{
+			Channel = tb_channel.Text.Replace("#", "");
 		}
 	}
 }

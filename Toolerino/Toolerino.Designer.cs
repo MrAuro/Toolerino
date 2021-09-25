@@ -138,6 +138,7 @@ namespace Toolerino
 			this.tb_channel.Name = "tb_channel";
 			this.tb_channel.Size = new System.Drawing.Size(176, 23);
 			this.tb_channel.TabIndex = 0;
+			this.tb_channel.TextChanged += new System.EventHandler(this.tb_channel_TextChanged);
 			// 
 			// groupBox2
 			// 
@@ -337,6 +338,7 @@ namespace Toolerino
 			this.tb_Logs.Location = new System.Drawing.Point(7, 20);
 			this.tb_Logs.Multiline = true;
 			this.tb_Logs.Name = "tb_Logs";
+			this.tb_Logs.ReadOnly = true;
 			this.tb_Logs.Size = new System.Drawing.Size(377, 62);
 			this.tb_Logs.TabIndex = 0;
 			// 
@@ -349,6 +351,7 @@ namespace Toolerino
 			this.b_clearLogs.TabIndex = 1;
 			this.b_clearLogs.Text = "Clear";
 			this.b_clearLogs.UseVisualStyleBackColor = true;
+			this.b_clearLogs.Click += new System.EventHandler(this.b_clearLogs_Click);
 			// 
 			// Toolerino
 			// 
