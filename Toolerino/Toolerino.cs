@@ -161,5 +161,58 @@ namespace Toolerino
 				clients[i].client.JoinChannel(tb_channel.Text);
 			}
 		}
+
+		private void b_runList_Click(object sender, EventArgs e)
+		{
+			if (clients.Count() == 0)
+			{
+				MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			string[] lines = tb_list.Text.Split(new char[] { '\r', '\n' });
+			if (lines.Length >= nud_chunkSize.Value)
+			{
+				// Chunk the list into arrays of arrays of lines
+				List<string[]> chunks = new List<string[]>();
+				int chunkSize = (int)nud_chunkSize.Value * 2;
+				for (int i = 0; i < lines.Length; i += chunkSize)
+				{
+					chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
+				}
+
+				// Send each chunk
+				foreach (string[] chunk in chunks)
+				{
+					foreach (string line in chunk)
+					{
+						if (r_ban.Checked)
+						{
+							getConnection().client.SendMessage(Channel, $"/ban {line}");
+						}
+						else if (r_unban.Checked)
+						{
+							getConnection().client.SendMessage(Channel, $"/unban {line}");
+						}
+						else if (r_say.Checked)
+						{
+							getConnection().client.SendMessage(Channel, line);
+						}
+					}
+					// check if this is the last chunk
+					if (chunks.IndexOf(chunk) != chunks.Count - 1)
+					{
+						Thread.Sleep(5000);
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < lines.Length; i++)
+				{
+					getConnection().client.SendMessage(Channel, lines[i]);
+				}
+			}
+		}
 	}
 }

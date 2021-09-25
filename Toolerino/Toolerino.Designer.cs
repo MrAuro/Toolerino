@@ -31,6 +31,7 @@ namespace Toolerino
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Toolerino));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.b_rejoin = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
 			this.tb_oauth = new System.Windows.Forms.TextBox();
 			this.nud_connections = new System.Windows.Forms.NumericUpDown();
@@ -56,7 +57,6 @@ namespace Toolerino
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.b_clearLogs = new System.Windows.Forms.Button();
 			this.tb_Logs = new System.Windows.Forms.TextBox();
-			this.b_rejoin = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -82,6 +82,16 @@ namespace Toolerino
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Connection";
+			// 
+			// b_rejoin
+			// 
+			this.b_rejoin.Location = new System.Drawing.Point(263, 66);
+			this.b_rejoin.Name = "b_rejoin";
+			this.b_rejoin.Size = new System.Drawing.Size(121, 23);
+			this.b_rejoin.TabIndex = 6;
+			this.b_rejoin.Text = "Rejoin channel";
+			this.b_rejoin.UseVisualStyleBackColor = true;
+			this.b_rejoin.Click += new System.EventHandler(this.b_rejoin_Click);
 			// 
 			// label5
 			// 
@@ -109,10 +119,10 @@ namespace Toolerino
 			this.nud_connections.Size = new System.Drawing.Size(49, 23);
 			this.nud_connections.TabIndex = 3;
 			this.nud_connections.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+			10,
+			0,
+			0,
+			0});
 			// 
 			// b_createClients
 			// 
@@ -170,6 +180,7 @@ namespace Toolerino
 			// r_say
 			// 
 			this.r_say.AutoSize = true;
+			this.r_say.Checked = true;
 			this.r_say.Location = new System.Drawing.Point(348, 234);
 			this.r_say.Name = "r_say";
 			this.r_say.Size = new System.Drawing.Size(43, 19);
@@ -185,7 +196,6 @@ namespace Toolerino
 			this.r_unban.Name = "r_unban";
 			this.r_unban.Size = new System.Drawing.Size(60, 19);
 			this.r_unban.TabIndex = 13;
-			this.r_unban.TabStop = true;
 			this.r_unban.Text = "Unban";
 			this.r_unban.UseVisualStyleBackColor = true;
 			// 
@@ -196,7 +206,6 @@ namespace Toolerino
 			this.r_ban.Name = "r_ban";
 			this.r_ban.Size = new System.Drawing.Size(45, 19);
 			this.r_ban.TabIndex = 12;
-			this.r_ban.TabStop = true;
 			this.r_ban.Text = "Ban";
 			this.r_ban.UseVisualStyleBackColor = true;
 			// 
@@ -208,6 +217,7 @@ namespace Toolerino
 			this.b_runList.TabIndex = 11;
 			this.b_runList.Text = "Run list";
 			this.b_runList.UseVisualStyleBackColor = true;
+			this.b_runList.Click += new System.EventHandler(this.b_runList_Click);
 			// 
 			// tb_list
 			// 
@@ -231,18 +241,18 @@ namespace Toolerino
 			// 
 			this.nud_chunkSize.Location = new System.Drawing.Point(348, 277);
 			this.nud_chunkSize.Maximum = new decimal(new int[] {
-            7500,
-            0,
-            0,
-            0});
+			7500,
+			0,
+			0,
+			0});
 			this.nud_chunkSize.Name = "nud_chunkSize";
 			this.nud_chunkSize.Size = new System.Drawing.Size(91, 23);
 			this.nud_chunkSize.TabIndex = 8;
 			this.nud_chunkSize.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// b_sendPyramid
 			// 
@@ -278,10 +288,10 @@ namespace Toolerino
 			this.nud_pyramidWidth.Size = new System.Drawing.Size(49, 23);
 			this.nud_pyramidWidth.TabIndex = 4;
 			this.nud_pyramidWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// nud_messageRepeat
 			// 
@@ -290,10 +300,10 @@ namespace Toolerino
 			this.nud_messageRepeat.Size = new System.Drawing.Size(49, 23);
 			this.nud_messageRepeat.TabIndex = 3;
 			this.nud_messageRepeat.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+			1,
+			0,
+			0,
+			0});
 			// 
 			// b_sendMessage
 			// 
@@ -354,16 +364,6 @@ namespace Toolerino
 			this.tb_Logs.ReadOnly = true;
 			this.tb_Logs.Size = new System.Drawing.Size(377, 62);
 			this.tb_Logs.TabIndex = 0;
-			// 
-			// b_rejoin
-			// 
-			this.b_rejoin.Location = new System.Drawing.Point(263, 66);
-			this.b_rejoin.Name = "b_rejoin";
-			this.b_rejoin.Size = new System.Drawing.Size(121, 23);
-			this.b_rejoin.TabIndex = 6;
-			this.b_rejoin.Text = "Rejoin channel";
-			this.b_rejoin.UseVisualStyleBackColor = true;
-			this.b_rejoin.Click += new System.EventHandler(this.b_rejoin_Click);
 			// 
 			// Toolerino
 			// 
