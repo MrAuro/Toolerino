@@ -181,6 +181,8 @@ namespace Toolerino
 					chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
 				}
 
+				tb_Logs.AppendText($"{chunks.Count} chunks created - #{Channel}" + "\r\n");
+
 				// Send each chunk
 				foreach (string[] chunk in chunks)
 				{
@@ -202,12 +204,18 @@ namespace Toolerino
 					// check if this is the last chunk
 					if (chunks.IndexOf(chunk) != chunks.Count - 1)
 					{
+						tb_Logs.AppendText($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}" + "\r\n");
 						Thread.Sleep(5000);
+					}
+					else
+					{
+						tb_Logs.AppendText($"{chunks.Count} chunks executed - #{Channel}" + "\r\n");
 					}
 				}
 			}
 			else
 			{
+				tb_Logs.AppendText($"Running list of {lines.Length} lines - #{Channel}" + "\r\n");
 				for (int i = 0; i < lines.Length; i++)
 				{
 					getConnection().client.SendMessage(Channel, lines[i]);
