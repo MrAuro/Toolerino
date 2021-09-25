@@ -53,13 +53,16 @@ namespace Toolerino
 			this.b_sendMessage = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_message = new System.Windows.Forms.TextBox();
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.tb_Logs = new System.Windows.Forms.TextBox();
+			this.b_clearLogs = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_chunkSize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.nud_pyramidWidth)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.nud_messageRepeat)).BeginInit();
+			this.groupBox3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -316,18 +319,42 @@ namespace Toolerino
 			this.tb_message.Size = new System.Drawing.Size(430, 23);
 			this.tb_message.TabIndex = 0;
 			// 
-			// progressBar1
+			// groupBox3
 			// 
-			this.progressBar1.Location = new System.Drawing.Point(13, 431);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(445, 23);
-			this.progressBar1.TabIndex = 5;
+			this.groupBox3.Controls.Add(this.b_clearLogs);
+			this.groupBox3.Controls.Add(this.tb_Logs);
+			this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.groupBox3.Location = new System.Drawing.Point(13, 431);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Size = new System.Drawing.Size(445, 88);
+			this.groupBox3.TabIndex = 5;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Logs";
+			// 
+			// tb_Logs
+			// 
+			this.tb_Logs.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.tb_Logs.Location = new System.Drawing.Point(7, 20);
+			this.tb_Logs.Multiline = true;
+			this.tb_Logs.Name = "tb_Logs";
+			this.tb_Logs.Size = new System.Drawing.Size(377, 62);
+			this.tb_Logs.TabIndex = 0;
+			// 
+			// b_clearLogs
+			// 
+			this.b_clearLogs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.b_clearLogs.Location = new System.Drawing.Point(390, 20);
+			this.b_clearLogs.Name = "b_clearLogs";
+			this.b_clearLogs.Size = new System.Drawing.Size(49, 62);
+			this.b_clearLogs.TabIndex = 1;
+			this.b_clearLogs.Text = "Clear";
+			this.b_clearLogs.UseVisualStyleBackColor = true;
 			// 
 			// Toolerino
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(470, 466);
-			this.Controls.Add(this.progressBar1);
+			this.ClientSize = new System.Drawing.Size(470, 531);
+			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -345,6 +372,8 @@ namespace Toolerino
 			((System.ComponentModel.ISupportInitialize)(this.nud_chunkSize)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.nud_pyramidWidth)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.nud_messageRepeat)).EndInit();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -372,9 +401,11 @@ namespace Toolerino
 		private System.Windows.Forms.Button b_sendMessage;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox tb_message;
-		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox tb_oauth;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.Button b_clearLogs;
+		private System.Windows.Forms.TextBox tb_Logs;
 	}
 }
 
