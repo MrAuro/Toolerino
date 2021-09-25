@@ -249,7 +249,7 @@ namespace Toolerino
 			this.nud_chunkSize.Size = new System.Drawing.Size(91, 23);
 			this.nud_chunkSize.TabIndex = 8;
 			this.nud_chunkSize.Value = new decimal(new int[] {
-			1,
+			90,
 			0,
 			0,
 			0});

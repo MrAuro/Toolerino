@@ -38,6 +38,7 @@ namespace Toolerino
 		public Toolerino()
 		{
 			InitializeComponent();
+			this.Text += $" {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major}.{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor}.{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision}";
 		}
 
 		private void b_createClients_Click(object sender, EventArgs e)
@@ -205,7 +206,7 @@ namespace Toolerino
 					if (chunks.IndexOf(chunk) != chunks.Count - 1)
 					{
 						tb_Logs.AppendText($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}" + "\r\n");
-						Thread.Sleep(5000);
+						Thread.Sleep(30000);
 					}
 					else
 					{
