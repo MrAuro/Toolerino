@@ -18,8 +18,9 @@ namespace Toolerino
 		public TwitchClient client;
 		public Boolean ready = false;
 
-		public Client(String oauth, String channel)
+		public Client(String oauth, String channel, Int32 i)
 		{
+			Console.WriteLine($"Creaating client {i}");
 			ConnectionCredentials credentials = new ConnectionCredentials("oura_bot", "oauth:" + oauth.Replace("oauth:", ""));
 			WebSocketClient customClient = new WebSocketClient();
 			client = new TwitchClient(customClient);

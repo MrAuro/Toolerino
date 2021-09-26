@@ -54,8 +54,7 @@ namespace Toolerino
 			{
 				Thread t = new Thread(() =>
 				{
-					Console.WriteLine($"Creating client {i}");
-					var client = new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel);
+					var client = new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel, i);
 					clients.Add(client);
 				});
 				t.Start();
