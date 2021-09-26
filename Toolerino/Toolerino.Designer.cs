@@ -85,11 +85,11 @@ namespace Toolerino
 			// 
 			// b_rejoin
 			// 
-			this.b_rejoin.Location = new System.Drawing.Point(263, 66);
+			this.b_rejoin.Location = new System.Drawing.Point(191, 66);
 			this.b_rejoin.Name = "b_rejoin";
-			this.b_rejoin.Size = new System.Drawing.Size(121, 23);
+			this.b_rejoin.Size = new System.Drawing.Size(193, 23);
 			this.b_rejoin.TabIndex = 6;
-			this.b_rejoin.Text = "Rejoin channel";
+			this.b_rejoin.Text = "Join channel";
 			this.b_rejoin.UseVisualStyleBackColor = true;
 			this.b_rejoin.Click += new System.EventHandler(this.b_rejoin_Click);
 			// 
@@ -119,16 +119,16 @@ namespace Toolerino
 			this.nud_connections.Size = new System.Drawing.Size(49, 23);
 			this.nud_connections.TabIndex = 3;
 			this.nud_connections.Value = new decimal(new int[] {
-			10,
-			0,
-			0,
-			0});
+            10,
+            0,
+            0,
+            0});
 			// 
 			// b_createClients
 			// 
 			this.b_createClients.Location = new System.Drawing.Point(9, 66);
 			this.b_createClients.Name = "b_createClients";
-			this.b_createClients.Size = new System.Drawing.Size(248, 23);
+			this.b_createClients.Size = new System.Drawing.Size(176, 23);
 			this.b_createClients.TabIndex = 2;
 			this.b_createClients.Text = "Create clients";
 			this.b_createClients.UseVisualStyleBackColor = true;
@@ -241,18 +241,18 @@ namespace Toolerino
 			// 
 			this.nud_chunkSize.Location = new System.Drawing.Point(348, 277);
 			this.nud_chunkSize.Maximum = new decimal(new int[] {
-			7500,
-			0,
-			0,
-			0});
+            7500,
+            0,
+            0,
+            0});
 			this.nud_chunkSize.Name = "nud_chunkSize";
 			this.nud_chunkSize.Size = new System.Drawing.Size(91, 23);
 			this.nud_chunkSize.TabIndex = 8;
 			this.nud_chunkSize.Value = new decimal(new int[] {
-			90,
-			0,
-			0,
-			0});
+            90,
+            0,
+            0,
+            0});
 			// 
 			// b_sendPyramid
 			// 
@@ -288,10 +288,10 @@ namespace Toolerino
 			this.nud_pyramidWidth.Size = new System.Drawing.Size(49, 23);
 			this.nud_pyramidWidth.TabIndex = 4;
 			this.nud_pyramidWidth.Value = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0});
+            1,
+            0,
+            0,
+            0});
 			// 
 			// nud_messageRepeat
 			// 
@@ -300,10 +300,10 @@ namespace Toolerino
 			this.nud_messageRepeat.Size = new System.Drawing.Size(49, 23);
 			this.nud_messageRepeat.TabIndex = 3;
 			this.nud_messageRepeat.Value = new decimal(new int[] {
-			1,
-			0,
-			0,
-			0});
+            1,
+            0,
+            0,
+            0});
 			// 
 			// b_sendMessage
 			// 

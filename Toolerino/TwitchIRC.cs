@@ -16,7 +16,7 @@ namespace Toolerino
 	class Client
 	{
 		public TwitchClient client;
-		public Boolean ready;
+		public Boolean ready = false;
 
 		public Client(String oauth, String channel)
 		{
@@ -25,13 +25,21 @@ namespace Toolerino
 			client = new TwitchClient(customClient);
 			client.Initialize(credentials, channel);
 			client.OnConnected += Client_OnConnected;
+			client.OnJoinedChannel += Client_OnJoinedChannel;
 			client.Connect();
+
+			void Client_OnConnected(object sender, OnConnectedArgs e)
+			{
+				client.JoinChannel(channel, true);
+				this.ready = true;
+			}
 		}
 
-		private void Client_OnConnected(object sender, OnConnectedArgs e)
+
+		private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
 		{
-			Console.WriteLine($"Connected to {e.AutoJoinChannel}");
 			this.ready = true;
+			Console.WriteLine($"Joined {e.Channel}");
 		}
 	}
 }

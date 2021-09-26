@@ -21,7 +21,7 @@ namespace Toolerino
 {
 	public partial class Toolerino : Form
 	{
-		string version = "1.0.2";
+		string version = "1.1.0";
 
 		List<Client> clients = new List<Client>();
 		string OAuth;
@@ -34,6 +34,7 @@ namespace Toolerino
 			Console.WriteLine(readyClients.Length);
 			lastIndex += 1;
 			var pos = lastIndex % readyClients.Length;
+			Console.WriteLine(readyClients[pos].client.JoinedChannels.ToArray().ToString());
 			return readyClients[pos];
 		}
 
@@ -47,10 +48,24 @@ namespace Toolerino
 		{
 			for (int i = 0; i < nud_connections.Value; i++)
 			{
-				Console.WriteLine($"Creating client {i}");
 				tb_Logs.AppendText($"Creating client {i}" + "\r\n");
-				clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel));
+				// new thread
+				Thread t = new Thread(() =>
+				{
+					Console.WriteLine($"Creating client {i}");
+					var client = new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel);
+					clients.Add(client);
+				});
+				t.Start();
 			}
+
+			// for (int i = 0; i < nud_connections.Value; i++)
+			// {
+			// 	Console.WriteLine($"Creating client {i}");
+			// 	tb_Logs.AppendText($"Creating client {i}" + "\r\n");
+			// 	clients.Add(new Client($"oauth:{OAuth.Replace("oauth:", "")}", Channel));
+			// }
+
 		}
 
 		private void b_sendMessage_Click(object sender, EventArgs e)
