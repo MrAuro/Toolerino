@@ -206,6 +206,7 @@ namespace Toolerino
 			// tb_list
 			// 
 			this.tb_list.Location = new System.Drawing.Point(9, 183);
+			this.tb_list.MaxLength = 500000;
 			this.tb_list.Multiline = true;
 			this.tb_list.Name = "tb_list";
 			this.tb_list.Size = new System.Drawing.Size(333, 88);

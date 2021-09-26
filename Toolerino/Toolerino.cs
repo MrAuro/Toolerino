@@ -186,80 +186,83 @@ namespace Toolerino
 
 		private void b_runList_Click(object sender, EventArgs e)
 		{
-			if (clients.Count() == 0)
+			new Thread(() =>
 			{
-				MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return;
-			}
-
-			string[] lines = tb_list.Text.Split(new char[] { '\r', '\n' });
-			if (lines.Length >= nud_chunkSize.Value)
-			{
-				// Chunk the list into arrays of arrays of lines
-				List<string[]> chunks = new List<string[]>();
-				int chunkSize = (int)nud_chunkSize.Value * 2;
-				for (int i = 0; i < lines.Length; i += chunkSize)
+				if (clients.Count() == 0)
 				{
-					chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
+					MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
 				}
 
-				Console.WriteLine($"{chunks.Count} chunks created - #{Channel}");
-
-				// Send each chunk
-				foreach (string[] chunk in chunks)
+				string[] lines = tb_list.Text.Split(new char[] { '\r', '\n' });
+				if (lines.Length >= nud_chunkSize.Value)
 				{
-					foreach (string line in chunk)
+					// Chunk the list into arrays of arrays of lines
+					List<string[]> chunks = new List<string[]>();
+					int chunkSize = (int)nud_chunkSize.Value * 2;
+					for (int i = 0; i < lines.Length; i += chunkSize)
+					{
+						chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
+					}
+
+					Console.WriteLine($"{chunks.Count} chunks created - #{Channel}");
+
+					// Send each chunk
+					foreach (string[] chunk in chunks)
+					{
+						foreach (string line in chunk)
+						{
+							if (r_ban.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {line}");
+							}
+							else if (r_unban.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {line}");
+							}
+							else if (r_say.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
+							}
+						}
+						// check if this is the last chunk
+						if (chunks.IndexOf(chunk) != chunks.Count - 1)
+						{
+							Console.WriteLine($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
+							Thread.Sleep(30000);
+						}
+						else
+						{
+							Console.WriteLine($"{chunks.Count} chunks executed - #{Channel}");
+						}
+					}
+				}
+				else
+				{
+					Console.WriteLine($"Running list of {lines.Length} lines - #{Channel}");
+					for (int i = 0; i < lines.Length; i++)
 					{
 						if (r_ban.Checked)
 						{
 							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {line}");
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {lines[i]}");
 						}
 						else if (r_unban.Checked)
 						{
 							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {line}");
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {lines[i]}");
 						}
 						else if (r_say.Checked)
 						{
 							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{lines[i]}");
 						}
 					}
-					// check if this is the last chunk
-					if (chunks.IndexOf(chunk) != chunks.Count - 1)
-					{
-						Console.WriteLine($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
-						Thread.Sleep(30000);
-					}
-					else
-					{
-						Console.WriteLine($"{chunks.Count} chunks executed - #{Channel}");
-					}
 				}
-			}
-			else
-			{
-				Console.WriteLine($"Running list of {lines.Length} lines - #{Channel}");
-				for (int i = 0; i < lines.Length; i++)
-				{
-					if (r_ban.Checked)
-					{
-						var connection = getConnection();
-						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {lines[i]}");
-					}
-					else if (r_unban.Checked)
-					{
-						var connection = getConnection();
-						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {lines[i]}");
-					}
-					else if (r_say.Checked)
-					{
-						var connection = getConnection();
-						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{lines[i]}");
-					}
-				}
-			}
+			}).Start();
 		}
 	}
 }
