@@ -15,6 +15,7 @@ using TwitchLib.Client.Extensions;
 using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
 using TwitchLib.Communication.Models;
+using System.Runtime.InteropServices;
 
 
 namespace Toolerino
@@ -22,6 +23,10 @@ namespace Toolerino
 	public partial class Toolerino : Form
 	{
 		string version = "1.1.0";
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		static extern bool AllocConsole();
 
 		List<Client> clients = new List<Client>();
 		string OAuth;
@@ -31,10 +36,9 @@ namespace Toolerino
 		private Client getConnection()
 		{
 			var readyClients = clients.Where(c => c.ready).ToArray();
-			Console.WriteLine(readyClients.Length);
+			Console.WriteLine($"Getting a client out of {readyClients.Length} ready clients");
 			lastIndex += 1;
 			var pos = lastIndex % readyClients.Length;
-			Console.WriteLine(readyClients[pos].client.JoinedChannels.ToArray().ToString());
 			return readyClients[pos];
 		}
 
@@ -48,8 +52,6 @@ namespace Toolerino
 		{
 			for (int i = 0; i < nud_connections.Value; i++)
 			{
-				tb_Logs.AppendText($"Creating client {i}" + "\r\n");
-				// new thread
 				Thread t = new Thread(() =>
 				{
 					Console.WriteLine($"Creating client {i}");
@@ -78,12 +80,16 @@ namespace Toolerino
 
 			for (int i = 0; i < nud_messageRepeat.Value; i++)
 			{
-				getConnection().client.SendMessage(Channel, tb_message.Text);
+				var connection = getConnection();
+				connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{tb_message.Text}");
+				// getConnection().client.SendMessage(Channel, tb_message.Text);
 			}
 		}
 
 		private void Toolerino_Load(object sender, EventArgs e)
 		{
+			AllocConsole();
+			Console.WriteLine("Toolerino Loaded!");
 			ToolTip mainToolTip = new ToolTip();
 			mainToolTip.AutoPopDelay = 5000;
 			mainToolTip.InitialDelay = 1000;
@@ -138,6 +144,7 @@ namespace Toolerino
 			}
 			else
 			{
+				Console.WriteLine($"Sending first half of pyramid - #{Channel}");
 				for (int i = 0; i < width; i++)
 				{
 					string line = "";
@@ -146,9 +153,11 @@ namespace Toolerino
 						line += $"{msg} ";
 					}
 					Thread.Sleep(100);
-					getConnection().client.SendMessage(Channel, line);
+					var connection = getConnection();
+					connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
 				}
 
+				Console.WriteLine($"Sending second half of pyramid - #{Channel}");
 				for (int i = width - 1; i >= 0; i--)
 				{
 					string line = "";
@@ -157,14 +166,10 @@ namespace Toolerino
 						line += $"{msg} ";
 					}
 					Thread.Sleep(100);
-					getConnection().client.SendMessage(Channel, line);
+					var connection = getConnection();
+					connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
 				}
 			}
-		}
-
-		private void b_clearLogs_Click(object sender, EventArgs e)
-		{
-			tb_Logs.Text = "";
 		}
 
 		private void tb_channel_TextChanged(object sender, EventArgs e)
@@ -199,7 +204,7 @@ namespace Toolerino
 					chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
 				}
 
-				tb_Logs.AppendText($"{chunks.Count} chunks created - #{Channel}" + "\r\n");
+				Console.WriteLine($"{chunks.Count} chunks created - #{Channel}");
 
 				// Send each chunk
 				foreach (string[] chunk in chunks)
@@ -208,45 +213,51 @@ namespace Toolerino
 					{
 						if (r_ban.Checked)
 						{
-							getConnection().client.SendMessage(Channel, $"/ban {line}");
+							var connection = getConnection();
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {line}");
 						}
 						else if (r_unban.Checked)
 						{
-							getConnection().client.SendMessage(Channel, $"/unban {line}");
+							var connection = getConnection();
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {line}");
 						}
 						else if (r_say.Checked)
 						{
-							getConnection().client.SendMessage(Channel, line);
+							var connection = getConnection();
+							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
 						}
 					}
 					// check if this is the last chunk
 					if (chunks.IndexOf(chunk) != chunks.Count - 1)
 					{
-						tb_Logs.AppendText($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}" + "\r\n");
+						Console.WriteLine($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
 						Thread.Sleep(30000);
 					}
 					else
 					{
-						tb_Logs.AppendText($"{chunks.Count} chunks executed - #{Channel}" + "\r\n");
+						Console.WriteLine($"{chunks.Count} chunks executed - #{Channel}");
 					}
 				}
 			}
 			else
 			{
-				tb_Logs.AppendText($"Running list of {lines.Length} lines - #{Channel}" + "\r\n");
+				Console.WriteLine($"Running list of {lines.Length} lines - #{Channel}");
 				for (int i = 0; i < lines.Length; i++)
 				{
 					if (r_ban.Checked)
 					{
-						getConnection().client.SendMessage(Channel, $"/ban {lines[i]}");
+						var connection = getConnection();
+						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {lines[i]}");
 					}
 					else if (r_unban.Checked)
 					{
-						getConnection().client.SendMessage(Channel, $"/unban {lines[i]}");
+						var connection = getConnection();
+						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {lines[i]}");
 					}
 					else if (r_say.Checked)
 					{
-						getConnection().client.SendMessage(Channel, lines[i]);
+						var connection = getConnection();
+						connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{lines[i]}");
 					}
 				}
 			}

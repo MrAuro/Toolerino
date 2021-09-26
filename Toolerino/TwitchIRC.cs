@@ -31,7 +31,6 @@ namespace Toolerino
 			void Client_OnConnected(object sender, OnConnectedArgs e)
 			{
 				client.JoinChannel(channel, true);
-				this.ready = true;
 			}
 		}
 
