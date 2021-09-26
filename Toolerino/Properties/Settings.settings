@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="oauth" Type="System.String" Scope="User">
-      <Value Profile="(Default)">asdasdfasdf</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

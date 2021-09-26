@@ -21,6 +21,8 @@ namespace Toolerino
 {
 	public partial class Toolerino : Form
 	{
+		string version = "1.0.2";
+
 		List<Client> clients = new List<Client>();
 		string OAuth;
 		string Channel;
@@ -38,7 +40,7 @@ namespace Toolerino
 		public Toolerino()
 		{
 			InitializeComponent();
-			this.Text += $" {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major}.{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor}.{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Revision}";
+			this.Text += $" {version}";
 		}
 
 		private void b_createClients_Click(object sender, EventArgs e)
@@ -219,7 +221,18 @@ namespace Toolerino
 				tb_Logs.AppendText($"Running list of {lines.Length} lines - #{Channel}" + "\r\n");
 				for (int i = 0; i < lines.Length; i++)
 				{
-					getConnection().client.SendMessage(Channel, lines[i]);
+					if (r_ban.Checked)
+					{
+						getConnection().client.SendMessage(Channel, $"/ban {lines[i]}");
+					}
+					else if (r_unban.Checked)
+					{
+						getConnection().client.SendMessage(Channel, $"/unban {lines[i]}");
+					}
+					else if (r_say.Checked)
+					{
+						getConnection().client.SendMessage(Channel, lines[i]);
+					}
 				}
 			}
 		}
