@@ -36,7 +36,7 @@ namespace Toolerino
 		private Client getConnection()
 		{
 			var readyClients = clients.Where(c => c.ready).ToArray();
-			Console.WriteLine($"Getting a client out of {readyClients.Length} ready clients");
+			Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} FETCHING CLIENT - {readyClients.Length} TOTAL");
 			lastIndex += 1;
 			var pos = lastIndex % readyClients.Length;
 			return readyClients[pos];
@@ -88,7 +88,7 @@ namespace Toolerino
 		private void Toolerino_Load(object sender, EventArgs e)
 		{
 			AllocConsole();
-			Console.WriteLine("Toolerino Loaded!");
+			Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Toolerino Loaded!");
 			ToolTip mainToolTip = new ToolTip();
 			mainToolTip.AutoPopDelay = 5000;
 			mainToolTip.InitialDelay = 1000;
@@ -143,7 +143,7 @@ namespace Toolerino
 			}
 			else
 			{
-				Console.WriteLine($"Sending first half of pyramid - #{Channel}");
+				Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Sending first half of pyramid - #{Channel}");
 				for (int i = 0; i < width; i++)
 				{
 					string line = "";
@@ -156,7 +156,7 @@ namespace Toolerino
 					connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
 				}
 
-				Console.WriteLine($"Sending second half of pyramid - #{Channel}");
+				Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Sending second half of pyramid - #{Channel}");
 				for (int i = width - 1; i >= 0; i--)
 				{
 					string line = "";
@@ -205,7 +205,7 @@ namespace Toolerino
 						chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
 					}
 
-					Console.WriteLine($"{chunks.Count} chunks created - #{Channel}");
+					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks created - #{Channel}");
 
 					// Send each chunk
 					foreach (string[] chunk in chunks)
@@ -231,18 +231,18 @@ namespace Toolerino
 						// check if this is the last chunk
 						if (chunks.IndexOf(chunk) != chunks.Count - 1)
 						{
-							Console.WriteLine($"Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
+							Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
 							Thread.Sleep(30000);
 						}
 						else
 						{
-							Console.WriteLine($"{chunks.Count} chunks executed - #{Channel}");
+							Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks executed - #{Channel}");
 						}
 					}
 				}
 				else
 				{
-					Console.WriteLine($"Running list of {lines.Length} lines - #{Channel}");
+					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Running list of {lines.Length} lines - #{Channel}");
 					for (int i = 0; i < lines.Length; i++)
 					{
 						if (r_ban.Checked)
