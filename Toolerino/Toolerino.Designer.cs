@@ -53,6 +53,7 @@ namespace Toolerino
 			this.b_sendMessage = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_message = new System.Windows.Forms.TextBox();
+			this.pb_file = new System.Windows.Forms.ProgressBar();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -138,6 +139,7 @@ namespace Toolerino
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.pb_file);
 			this.groupBox2.Controls.Add(this.r_say);
 			this.groupBox2.Controls.Add(this.r_unban);
 			this.groupBox2.Controls.Add(this.r_ban);
@@ -156,7 +158,7 @@ namespace Toolerino
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(13, 118);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(445, 306);
+			this.groupBox2.Size = new System.Drawing.Size(445, 331);
 			this.groupBox2.TabIndex = 4;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Messaging";
@@ -317,10 +319,17 @@ namespace Toolerino
 			this.tb_message.Size = new System.Drawing.Size(430, 23);
 			this.tb_message.TabIndex = 0;
 			// 
+			// pb_file
+			// 
+			this.pb_file.Location = new System.Drawing.Point(9, 307);
+			this.pb_file.Name = "pb_file";
+			this.pb_file.Size = new System.Drawing.Size(430, 15);
+			this.pb_file.TabIndex = 15;
+			// 
 			// Toolerino
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(470, 435);
+			this.ClientSize = new System.Drawing.Size(470, 459);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -367,6 +376,7 @@ namespace Toolerino
 		private System.Windows.Forms.TextBox tb_message;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox tb_oauth;
+		private System.Windows.Forms.ProgressBar pb_file;
 	}
 }
 

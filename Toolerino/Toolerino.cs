@@ -207,6 +207,13 @@ namespace Toolerino
 
 					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks created - #{Channel}");
 
+					pb_file.BeginInvoke((Action)delegate ()
+					{
+						pb_file.Value = 0;
+						pb_file.Minimum = 0;
+						pb_file.Maximum = chunks.Count;
+					});
+
 					// Send each chunk
 					foreach (string[] chunk in chunks)
 					{
@@ -228,6 +235,11 @@ namespace Toolerino
 								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
 							}
 						}
+
+						pb_file.BeginInvoke((Action)delegate ()
+						{
+							pb_file.Value = chunks.IndexOf(chunk) + 1;
+						});
 						// check if this is the last chunk
 						if (chunks.IndexOf(chunk) != chunks.Count - 1)
 						{
