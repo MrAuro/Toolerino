@@ -22,7 +22,7 @@ namespace Toolerino
 {
 	public partial class Toolerino : Form
 	{
-		string version = "1.1.2";
+		string version = "1.2.0";
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
