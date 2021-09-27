@@ -39,7 +39,7 @@ namespace Toolerino
 		private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
 		{
 			this.ready = true;
-			Console.WriteLine($"Joined {e.Channel}");
+			Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Joined {e.Channel}");
 		}
 	}
 }
