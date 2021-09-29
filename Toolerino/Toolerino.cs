@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Threading;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TwitchLib.Client;
-using TwitchLib.Client.Enums;
-using TwitchLib.Client.Events;
-using TwitchLib.Client.Extensions;
-using TwitchLib.Client.Models;
-using TwitchLib.Communication.Clients;
-using TwitchLib.Communication.Models;
+using Microsoft.VisualBasic;
 using System.Runtime.InteropServices;
-
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace Toolerino
 {
 	public partial class Toolerino : Form
 	{
-		string version = "1.2.0";
+		string version = "1.3.0";
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -184,97 +177,199 @@ namespace Toolerino
 			}
 		}
 
-		private void b_runList_Click(object sender, EventArgs e)
+		private async void b_runList_Click(object sender, EventArgs e)
 		{
-			new Thread(() =>
+
+			if (r_block.Checked)
 			{
-				if (clients.Count() == 0)
+				if (!Properties.Settings.Default.blockWarning)
 				{
-					MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return;
-				}
-
-				string[] lines = tb_list.Text.Split(new char[] { '\r', '\n' });
-				if (lines.Length >= nud_chunkSize.Value)
-				{
-					// Chunk the list into arrays of arrays of lines
-					List<string[]> chunks = new List<string[]>();
-					int chunkSize = (int)nud_chunkSize.Value * 2;
-					for (int i = 0; i < lines.Length; i += chunkSize)
+					Properties.Settings.Default.blockWarning = true;
+					Properties.Settings.Default.Save();
+					if (MessageBox.Show("Blocking bots may decrease your follow count. Blocks may take some time to appear on Twitch. Do not run any huge lists with this.\n\nAre you sure you want to continue?", "Toolerino", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
 					{
-						chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
+						return;
 					}
+				}
+				string[] loginList = tb_list.Text.Split(new char[] { '\r', '\n' }).Where(x => !String.IsNullOrEmpty(x)).ToArray();
 
-					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks created - #{Channel}");
+				HttpClient httpClient = new HttpClient();
+				httpClient.DefaultRequestHeaders.Clear();
 
-					pb_file.BeginInvoke((Action)delegate ()
+
+				System.Diagnostics.Process.Start("https://toolerino-oauth.mrauro.dev");
+				string accessToken = Interaction.InputBox("Please enter the access token the webpage that just opened (https://toolerino-oauth.mrauro.dev/)", "Toolerino", "");
+				if (string.IsNullOrWhiteSpace(accessToken)) return;
+
+
+				httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+				httpClient.DefaultRequestHeaders.Add("Client-Id", "us5x1xwywro4qbi2fqba536ynjd99d");
+
+				List<string> userIds = new List<string> { };
+				if (loginList.Length > 100)
+				{
+					int chunkSize = 100;
+					int chunkCount = (int)Math.Ceiling((double)loginList.Length / chunkSize);
+					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Chunking user list into {chunkCount} chunks");
+					for (int i = 0; i < chunkCount; i++)
 					{
-						pb_file.Value = 0;
-						pb_file.Minimum = 0;
-						pb_file.Maximum = chunks.Count;
-					});
+						string[] chunk = loginList.Skip(i * chunkSize).Take(chunkSize).ToArray();
+						string chunkString = string.Join("&login=", chunk);
+						string url = "https://api.twitch.tv/helix/users?login=" + chunkString;
+						// Console.WriteLine(url);
+						var response = await httpClient.GetAsync(url);
+						var responseString = await response.Content.ReadAsStringAsync();
+						var responseJson = JsonConvert.DeserializeObject<dynamic>(responseString);
 
-					// Send each chunk
-					foreach (string[] chunk in chunks)
-					{
-						foreach (string line in chunk)
+						foreach (var user in responseJson.data)
 						{
-							if (r_ban.Checked)
-							{
-								var connection = getConnection();
-								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {line}");
-							}
-							else if (r_unban.Checked)
-							{
-								var connection = getConnection();
-								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {line}");
-							}
-							else if (r_say.Checked)
-							{
-								var connection = getConnection();
-								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
-							}
+							userIds.Add((string)user.id);
 						}
 
-						pb_file.BeginInvoke((Action)delegate ()
-						{
-							pb_file.Value = chunks.IndexOf(chunk) + 1;
-						});
-						// check if this is the last chunk
-						if (chunks.IndexOf(chunk) != chunks.Count - 1)
-						{
-							Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
-							Thread.Sleep(30000);
-						}
-						else
-						{
-							Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks executed - #{Channel}");
-						}
 					}
 				}
 				else
 				{
-					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Running list of {lines.Length} lines - #{Channel}");
-					for (int i = 0; i < lines.Length; i++)
+					Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Fetching user IDs");
+					string url = $"https://api.twitch.tv/helix/users?login=" + String.Join("&login=", loginList);
+					// Console.WriteLine(url);
+					var response = await httpClient.GetAsync(url);
+					var responseString = await response.Content.ReadAsStringAsync();
+					var responseJson = JsonConvert.DeserializeObject<dynamic>(responseString);
+					foreach (var user in responseJson.data)
 					{
-						if (r_ban.Checked)
+						userIds.Add((string)user.id);
+					}
+				}
+
+				// Console.WriteLine("USERIDS");
+				// Console.WriteLine(String.Join("\n", userIds));
+
+				// block each user
+				Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Blocking users");
+				foreach (string userId in userIds)
+				{
+					var response = await httpClient.PutAsync($"https://api.twitch.tv/helix/users/blocks?target_user_id={userId}", null);
+					// check if the response is not 204, if so, print the error
+					if (response.StatusCode != HttpStatusCode.NoContent)
+					{
+						var responseString = await response.Content.ReadAsStringAsync();
+						var responseJson = JsonConvert.DeserializeObject<dynamic>(responseString);
+						Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Error blocking user {userId}");
+						Console.WriteLine(responseJson.message);
+					}
+					else
+					{
+						Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Blocked user {userId}");
+					}
+
+					// check if the bucket is empty, if so, wait for the reset time
+					// -- !! THIS IS UNTESTED !! --
+					if (response.Headers.Contains("ratelimit-remaining"))
+					{
+						int remaining = int.Parse(response.Headers.GetValues("ratelimit-remaining").First());
+						if (remaining == 0)
 						{
-							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {lines[i]}");
-						}
-						else if (r_unban.Checked)
-						{
-							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {lines[i]}");
-						}
-						else if (r_say.Checked)
-						{
-							var connection = getConnection();
-							connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{lines[i]}");
+							int reset = int.Parse(response.Headers.GetValues("ratelimit-reset").First());
+							DateTime resetTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(reset);
+							Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Waiting for reset time {resetTime.ToString("HH:mm:ss.fff")}");
+							await Task.Delay(resetTime - DateTime.Now);
 						}
 					}
 				}
-			}).Start();
+			}
+			else
+			{
+				new Thread(() =>
+				{
+					if (clients.Count() == 0)
+					{
+						MessageBox.Show("No clients connected/created", "Toolerino", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					string[] lines = tb_list.Text.Split(new char[] { '\r', '\n' }).Where(x => !String.IsNullOrEmpty(x)).ToArray();
+					if (lines.Length >= nud_chunkSize.Value)
+					{
+						// Chunk the list into arrays of arrays of lines
+						List<string[]> chunks = new List<string[]>();
+						int chunkSize = (int)nud_chunkSize.Value * 2;
+						for (int i = 0; i < lines.Length; i += chunkSize)
+						{
+							chunks.Add(lines.Skip(i).Take(chunkSize).ToArray());
+						}
+
+						Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks created - #{Channel}");
+
+						pb_file.BeginInvoke((Action)delegate ()
+						{
+							pb_file.Value = 0;
+							pb_file.Minimum = 0;
+							pb_file.Maximum = chunks.Count;
+						});
+
+						// Send each chunk
+						foreach (string[] chunk in chunks)
+						{
+							foreach (string line in chunk)
+							{
+								if (r_ban.Checked)
+								{
+									var connection = getConnection();
+									connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {line}");
+								}
+								else if (r_unban.Checked)
+								{
+									var connection = getConnection();
+									connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {line}");
+								}
+								else if (r_say.Checked)
+								{
+									var connection = getConnection();
+									connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{line}");
+								}
+							}
+
+							pb_file.BeginInvoke((Action)delegate ()
+							{
+								pb_file.Value = chunks.IndexOf(chunk) + 1;
+							});
+							// check if this is the last chunk
+							if (chunks.IndexOf(chunk) != chunks.Count - 1)
+							{
+								Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Sleeping on chunk {chunks.IndexOf(chunk)}/{chunks.Count - 1} - #{Channel}");
+								Thread.Sleep(30000);
+							}
+							else
+							{
+								Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} {chunks.Count} chunks executed - #{Channel}");
+							}
+						}
+					}
+					else
+					{
+						Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Running list of {lines.Length} lines - #{Channel}");
+						for (int i = 0; i < lines.Length; i++)
+						{
+							if (r_ban.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.ban {lines[i]}");
+							}
+							else if (r_unban.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :.unban {lines[i]}");
+							}
+							else if (r_say.Checked)
+							{
+								var connection = getConnection();
+								connection.client.SendRaw($"PRIVMSG #{Channel.ToLower()} :{lines[i]}");
+							}
+						}
+					}
+				}).Start();
+			}
 		}
 	}
 }

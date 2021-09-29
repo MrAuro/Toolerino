@@ -34,5 +34,17 @@ namespace Toolerino.Properties {
                 this["oauth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool blockWarning {
+            get {
+                return ((bool)(this["blockWarning"]));
+            }
+            set {
+                this["blockWarning"] = value;
+            }
+        }
     }
 }
