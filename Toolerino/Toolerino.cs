@@ -1,34 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Threading;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TwitchLib.Client;
-using TwitchLib.Client.Enums;
-using TwitchLib.Client.Events;
-using TwitchLib.Client.Extensions;
-using TwitchLib.Client.Models;
-using TwitchLib.Communication.Clients;
-using TwitchLib.Communication.Models;
-using TwitchLib.Api;
-using TwitchLib.Api.Interfaces;
-using TwitchLib.Api.Helix.Models.Users.GetUsers;
-using TwitchLib.Api.Helix.Models.Users;
-using TwitchLib.Api.Services;
 using Microsoft.VisualBasic;
-using TwitchLib.Api.Services.Events;
-using TwitchLib.Api.Services.Events.LiveStreamMonitor;
 using System.Runtime.InteropServices;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Net;
-using Microsoft.VisualBasic;
 
 namespace Toolerino
 {
@@ -39,8 +20,6 @@ namespace Toolerino
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		static extern bool AllocConsole();
-
-		private static TwitchAPI api;
 
 		List<Client> clients = new List<Client>();
 		string OAuth;
