@@ -54,6 +54,7 @@ namespace Toolerino
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_message = new System.Windows.Forms.TextBox();
 			this.pb_file = new System.Windows.Forms.ProgressBar();
+			this.r_block = new System.Windows.Forms.RadioButton();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_connections)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -139,6 +140,7 @@ namespace Toolerino
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.r_block);
 			this.groupBox2.Controls.Add(this.pb_file);
 			this.groupBox2.Controls.Add(this.r_say);
 			this.groupBox2.Controls.Add(this.r_unban);
@@ -158,7 +160,7 @@ namespace Toolerino
 			this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(13, 118);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(445, 331);
+			this.groupBox2.Size = new System.Drawing.Size(445, 334);
 			this.groupBox2.TabIndex = 4;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Messaging";
@@ -167,18 +169,17 @@ namespace Toolerino
 			// 
 			this.r_say.AutoSize = true;
 			this.r_say.Checked = true;
-			this.r_say.Location = new System.Drawing.Point(348, 234);
+			this.r_say.Location = new System.Drawing.Point(348, 233);
 			this.r_say.Name = "r_say";
 			this.r_say.Size = new System.Drawing.Size(43, 19);
 			this.r_say.TabIndex = 14;
-			this.r_say.TabStop = true;
 			this.r_say.Text = "Say";
 			this.r_say.UseVisualStyleBackColor = true;
 			// 
 			// r_unban
 			// 
 			this.r_unban.AutoSize = true;
-			this.r_unban.Location = new System.Drawing.Point(348, 209);
+			this.r_unban.Location = new System.Drawing.Point(348, 208);
 			this.r_unban.Name = "r_unban";
 			this.r_unban.Size = new System.Drawing.Size(60, 19);
 			this.r_unban.TabIndex = 13;
@@ -188,7 +189,7 @@ namespace Toolerino
 			// r_ban
 			// 
 			this.r_ban.AutoSize = true;
-			this.r_ban.Location = new System.Drawing.Point(348, 184);
+			this.r_ban.Location = new System.Drawing.Point(348, 183);
 			this.r_ban.Name = "r_ban";
 			this.r_ban.Size = new System.Drawing.Size(45, 19);
 			this.r_ban.TabIndex = 12;
@@ -197,7 +198,7 @@ namespace Toolerino
 			// 
 			// b_runList
 			// 
-			this.b_runList.Location = new System.Drawing.Point(9, 277);
+			this.b_runList.Location = new System.Drawing.Point(9, 284);
 			this.b_runList.Name = "b_runList";
 			this.b_runList.Size = new System.Drawing.Size(333, 23);
 			this.b_runList.TabIndex = 11;
@@ -211,7 +212,7 @@ namespace Toolerino
 			this.tb_list.MaxLength = 500000;
 			this.tb_list.Multiline = true;
 			this.tb_list.Name = "tb_list";
-			this.tb_list.Size = new System.Drawing.Size(333, 88);
+			this.tb_list.Size = new System.Drawing.Size(333, 95);
 			this.tb_list.TabIndex = 10;
 			// 
 			// label4
@@ -226,7 +227,7 @@ namespace Toolerino
 			// 
 			// nud_chunkSize
 			// 
-			this.nud_chunkSize.Location = new System.Drawing.Point(348, 277);
+			this.nud_chunkSize.Location = new System.Drawing.Point(348, 284);
 			this.nud_chunkSize.Maximum = new decimal(new int[] {
             7500,
             0,
@@ -321,15 +322,25 @@ namespace Toolerino
 			// 
 			// pb_file
 			// 
-			this.pb_file.Location = new System.Drawing.Point(9, 307);
+			this.pb_file.Location = new System.Drawing.Point(9, 313);
 			this.pb_file.Name = "pb_file";
 			this.pb_file.Size = new System.Drawing.Size(430, 15);
 			this.pb_file.TabIndex = 15;
 			// 
+			// r_block
+			// 
+			this.r_block.AutoSize = true;
+			this.r_block.Location = new System.Drawing.Point(348, 258);
+			this.r_block.Name = "r_block";
+			this.r_block.Size = new System.Drawing.Size(59, 19);
+			this.r_block.TabIndex = 16;
+			this.r_block.Text = "Block*";
+			this.r_block.UseVisualStyleBackColor = true;
+			// 
 			// Toolerino
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(470, 459);
+			this.ClientSize = new System.Drawing.Size(470, 464);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -377,6 +388,7 @@ namespace Toolerino
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox tb_oauth;
 		private System.Windows.Forms.ProgressBar pb_file;
+		private System.Windows.Forms.RadioButton r_block;
 	}
 }
 
