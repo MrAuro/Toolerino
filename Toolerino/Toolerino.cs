@@ -15,7 +15,8 @@ namespace Toolerino
 {
 	public partial class Toolerino : Form
 	{
-		string version = "1.3.0";
+		string version = "1.3.1";
+		string accessToken = "";
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -191,15 +192,18 @@ namespace Toolerino
 						return;
 					}
 				}
-				string[] loginList = tb_list.Text.Split(new char[] { '\r', '\n' }).Where(x => !String.IsNullOrEmpty(x)).ToArray();
+
+				string[] loginList = tb_list.Text.Split(new char[] { '\r', '\n' }).Select(x => x.Trim()).Where(x => !String.IsNullOrEmpty(x)).ToArray();
 
 				HttpClient httpClient = new HttpClient();
 				httpClient.DefaultRequestHeaders.Clear();
 
-
-				System.Diagnostics.Process.Start("https://toolerino-oauth.mrauro.dev");
-				string accessToken = Interaction.InputBox("Please enter the access token the webpage that just opened (https://toolerino-oauth.mrauro.dev/)", "Toolerino", "");
-				if (string.IsNullOrWhiteSpace(accessToken)) return;
+				if (string.IsNullOrWhiteSpace(accessToken))
+				{
+					System.Diagnostics.Process.Start("https://toolerino-oauth.mrauro.dev");
+					accessToken = Interaction.InputBox("Please enter the access token the webpage that just opened (https://toolerino-oauth.mrauro.dev/)", "Toolerino", "");
+					if (string.IsNullOrWhiteSpace(accessToken)) return;
+				}
 
 
 				httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
@@ -244,6 +248,7 @@ namespace Toolerino
 
 				// Console.WriteLine("USERIDS");
 				// Console.WriteLine(String.Join("\n", userIds));
+				Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Found {userIds.Count} valid user IDs");
 
 				// block each user
 				Console.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")} Blocking users");
